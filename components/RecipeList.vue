@@ -1,10 +1,12 @@
 <template>
   <div>
-    {{ recipe.id }} <br>
-    {{ recipe.title }} <br>
-    {{ recipe.url }} <br>
-    {{ recipe.imageUrl }} <br>
-    {{ recipe.materials }} <br>
+    <div v-for="recipe in recipes" :key="recipe.id" class="bg-gray-200 mt-2">
+      {{ recipe.id }} <br>
+      {{ recipe.title }} <br>
+      {{ recipe.url }} <br>
+      {{ recipe.imageUrl }} <br>
+      {{ recipe.materials }} <br>
+    </div>
   </div>
 </template>
 
@@ -14,15 +16,14 @@ import { Recipe } from "@/types/recipe"
 
 export default defineComponent({
   props: {
-    recipe: {
-      type: Object
+    recipes: {
+      type: Array
     }
   },
-  setup(props: { recipe: Recipe }) {
-    const recipe = ref(props.recipe);
-    console.log(props.recipe);
+  setup(props: { recipes: Recipe[] }) {
+    const recipes = ref(props.recipes);
     return {
-      recipe
+      recipes
     }
   }
 })
