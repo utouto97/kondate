@@ -4,7 +4,7 @@
       {{ recipe.id }} <br>
       {{ recipe.title }} <br>
       {{ recipe.url }} <br>
-      {{ recipe.imageUrl }} <br>
+      <img :src="recipe.imageUrl" width="320" /> <br>
       {{ recipe.materials }} <br>
     </div>
   </div>
@@ -25,6 +25,6 @@ export default defineComponent({
     return {
       recipes
     }
-  }
+  },
 })
 </script>

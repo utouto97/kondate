@@ -3,51 +3,26 @@
 </template>
 
 <script lang="ts">
-import { defineComponent } from "@nuxtjs/composition-api"
+import { defineComponent, ref } from "@nuxtjs/composition-api"
+import { Context } from "@nuxt/types"
 import { Recipe } from "@/types/recipe"
 
 export default defineComponent({
   setup() {
-    const recipe1: Recipe = {
-      id: 1,
-      title: "Title 1",
-      url: "URL1",
-      imageUrl: "ImageURL1",
-      materials: [
-        "material 1",
-        "material 2",
-        "material 3",
-      ]
-    };
-    const recipe2: Recipe = {
-      id: 2,
-      title: "Title 2",
-      url: "URL2",
-      imageUrl: "ImageURL2",
-      materials: [
-        "material 2",
-        "material 4",
-      ]
-    };
-    const recipe3: Recipe = {
-      id: 3,
-      title: "Title 3",
-      url: "URL3",
-      imageUrl: "ImageURL3",
-      materials: [
-        "material 1",
-        "material 3",
-        "material 4",
-        "material 5",
-      ]
-    };
-
-    const recipes: Recipe[] = [
-      recipe1,
-      recipe2,
-      recipe3,
-    ];
-
+  },
+  async asyncData(context: Context) {
+    const recipes: Recipe[] = []
+    const result = (await context.$api.get('')).data.result
+    for (var i = 0; i < result.length; i++) {
+      const recipe: Recipe = {
+        id: result[i].recipeId,
+        title: result[i].recipeTitle,
+        url: result[i].recipeUrl,
+        imageUrl: result[i].foodImageUrl,
+        materials: result[i].recipeMaterial,
+      }
+      recipes.push(recipe)
+    }
     return {
       recipes
     }
