@@ -1,11 +1,15 @@
 <template>
-  <div>
-    <div v-for="recipe in recipes" :key="recipe.id" class="bg-gray-200 mt-2">
-      {{ recipe.id }} <br>
-      {{ recipe.title }} <br>
-      {{ recipe.url }} <br>
-      <img :src="recipe.imageUrl" width="320" /> <br>
-      {{ recipe.materials }} <br>
+  <div class="flex flex-wrap justify-center">
+    <div v-for="recipe in recipes" :key="recipe.id" class="w-60 mx-auto bg-white rounded-xl shadow-md overflow-hidden mt-2">
+      <img :src="recipe.imageUrl" class="w-60 h-52" />
+      <div class="px-6 py-4">
+        <div class="text-lg font-bold mb-2"> {{ recipe.title }} </div>
+        <div class="font-bold mb-2"> 材料 </div>
+        <ul class="text-sm text-gray-600 mb-4">
+          <li v-for="material in recipe.materials" :key="material">{{ material }}</li>
+        </ul>
+        <a v-bind:href="recipe.url" class="py-2 px-4 bg-gray-200 font-bold rounded hover:opacity-75">詳細</a>
+      </div>
     </div>
   </div>
 </template>
